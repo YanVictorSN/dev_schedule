@@ -14,10 +14,24 @@ export class UsersService {
         .upsert([createUserDto]);
 
       if (error) {
-        this.logger.error('Erro ao criar um novo usuário no Superbase', error);
-        throw error;
+        if (
+          error.message.includes(
+            'duplicate key value violates unique constraint',
+          )
+        ) {
+          const errorMessage = 'Contato já existe com este e-mail.';
+          return {
+            status: 409,
+            error: errorMessage,
+          };
+        } else {
+          this.logger.error(
+            'Erro ao criar um novo usuário no Superbase',
+            error,
+          );
+          throw error;
+        }
       }
-
       return data;
     } catch (error) {
       this.logger.error('Erro ao criar um novo usuário:', error);

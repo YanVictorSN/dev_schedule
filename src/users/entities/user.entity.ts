@@ -15,7 +15,7 @@ export class UserEntity {
   name: string;
 
   @IsNotEmpty()
-  @IsEmail()
+  @IsEmail({}, { message: 'Digite um e-mail válido.' })
   @Length(1, 50)
   email: string;
 
