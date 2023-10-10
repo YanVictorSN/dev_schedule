@@ -1,5 +1,4 @@
 export class CreateUserDto {
-  id: string;
   name: string;
   email: string;
   birthdate: string;
@@ -10,7 +9,6 @@ export class CreateUserDto {
   phone: string;
   zip_code: string;
   address: string;
-  district: string;
   city: string;
   state: string;
   complement: string;
