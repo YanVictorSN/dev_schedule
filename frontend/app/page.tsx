@@ -1,14 +1,28 @@
-import Link from 'next/link';
+'use client';
+import React, { useEffect } from 'react';
+import { Image } from '@nextui-org/react';
 import './global.css';
 
-import { Button } from '@nextui-org/button';
-
 export default function Home() {
+  useEffect(() => {
+    import('preline');
+  }, []);
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <Link href={'/users'}>Contatos</Link>
-      <Button color="primary">Button</Button>
-    </div>
+    <>
+      <div className=" flex flex-col">
+        <div className="flex justify-items-center w-28">
+          <p>Oie</p>
+        </div>
+        <div className="flex-end">
+          <Image
+            width={500}
+            height={500}
+            alt="NextUI hero Image"
+            src="Calendar-rafiki.svg"
+          />
+        </div>
+      </div>
+    </>
   );
 }

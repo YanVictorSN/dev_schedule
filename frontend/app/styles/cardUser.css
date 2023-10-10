@@ -1,0 +1,4 @@
+#carduser {
+    display: flex;
+    justify-content: space-around;
+}
