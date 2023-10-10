@@ -21,7 +21,7 @@ async function getUser(url: string) {
   });
 }
 
-export default function ModalEdit({ id }) {
+export default function ModalEdit({ id }: { id: string }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [formData, setFormData] = useState({
     name: ``,
@@ -44,9 +44,9 @@ export default function ModalEdit({ id }) {
     if (isOpen && id) {
       fetchDataModalOpen(id);
     }
-  }, [isOpen, id]);
+  });
 
-  const fetchDataModalOpen = async (idUser) => {
+  const fetchDataModalOpen = async (idUser: string) => {
     try {
       const response = await fetch(`http://localhost:3001/users/${idUser}`);
       const data = await response.json();
@@ -123,7 +123,7 @@ export default function ModalEdit({ id }) {
   };
 
   const [formattedZipCode, setFormattedZipCode] = useState('');
-  const formatZipCode = (input) => {
+  const formatZipCode = (input: string) => {
     const value = input.replace(/\D/g, '');
 
     let formattedValue = '';
@@ -194,7 +194,7 @@ export default function ModalEdit({ id }) {
 
   const [message, setMessage] = useState('');
   const { trigger } = useSWRMutation('http://localhost:3001/users', getUser);
-  const handleSubmit = async (idUser, onClose) => {
+  const handleSubmit = async (idUser: string, onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === '');
     console.log(formData);
     if (isEmptyField) {

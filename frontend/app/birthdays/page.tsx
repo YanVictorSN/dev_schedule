@@ -10,6 +10,11 @@ interface DemoAppState {
   currentEvents: Array<any>[];
 }
 
+interface Data {
+  name: string;
+  birthdate: string;
+}
+
 export default class DemoApp extends React.Component<object, DemoAppState> {
   state: DemoAppState = {
     currentEvents: [], // Inicialmente, a lista de eventos está vazia
@@ -30,9 +35,8 @@ export default class DemoApp extends React.Component<object, DemoAppState> {
     const resData = await fetch('http://localhost:3001/users');
 
     const arrayData = await resData.json();
-    console.log(arrayData);
 
-    const eventos = arrayData.map((data) => ({
+    const eventos = arrayData.map((data: Data) => ({
       title: data.name,
       start: data.birthdate,
     }));

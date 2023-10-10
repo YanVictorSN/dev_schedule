@@ -34,3 +34,5 @@ sendgrid.env
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.jsonsendgrid.env
+
+.vercel

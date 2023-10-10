@@ -98,7 +98,7 @@ export default function RegisterUSer() {
   };
 
   const [formattedZipCode, setFormattedZipCode] = useState('');
-  const formatZipCode = (input) => {
+  const formatZipCode = (input: string) => {
     const value = input.replace(/\D/g, '');
 
     let formattedValue = '';
@@ -176,7 +176,7 @@ export default function RegisterUSer() {
   };
 
   const { trigger } = useSWRMutation('http://localhost:3001/users', getUser);
-  const handleSubmit = async (onClose) => {
+  const handleSubmit = async (onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === '');
     console.log(formData);
     if (isEmptyField) {
@@ -213,6 +213,7 @@ export default function RegisterUSer() {
 
         setMessage('Contato adicionado com sucesso!');
         clearMessage();
+        onClose();
       }
 
       trigger();

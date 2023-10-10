@@ -1,5 +1,5 @@
 'use client';
-import Link from 'next/link';
+
 import useSWR from 'swr';
 import Modaltest from './register/ModalRegisterUser';
 import CardUser from '../(components)/CardUser';
@@ -21,7 +21,7 @@ interface Card {
   zip_code: string;
 }
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url: any) => fetch(url).then((res) => res.json());
 export default function Contacts() {
   const {
     data: userData,
@@ -31,13 +31,13 @@ export default function Contacts() {
 
   const {
     data: postaData,
-    error: postaError,
-    isLoading: isPostaLoading,
+    // error: postaError,
+    // isLoading: isPostaLoading,
   } = useSWR('http://localhost:3001/images', fetcher);
 
   if (userData && postaData) {
-    userData.forEach((element) => {
-      postaData.map((item) => {
+    userData.forEach((element: any) => {
+      postaData.map((item: any) => {
         if (element.photo_url === item.name)
           element.public_url = item.url.publicUrl;
       });
@@ -53,7 +53,7 @@ export default function Contacts() {
   if (userError) return <div>Failed to load</div>;
   if (isUserLoading) return <div>Loading...</div>;
 
-  const filteredContacts = userData.filter((contact) =>
+  const filteredContacts = userData.filter((contact: Card) =>
     contact.name.toLowerCase().includes(searchText.toLowerCase()),
   );
 

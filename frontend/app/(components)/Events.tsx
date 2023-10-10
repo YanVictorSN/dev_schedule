@@ -5,8 +5,10 @@ export async function getData() {
   const arrayData = await resData.json();
   const arrayDataImg = await resImg.json();
 
-  const resultado = arrayData.map((item) => {
-    const matchingItem = arrayDataImg.find((x) => x.name === item.photo_url);
+  const resultado = arrayData.map((item: any) => {
+    const matchingItem = arrayDataImg.find(
+      (x: any) => x.name === item.photo_url,
+    );
     if (matchingItem) {
       item.public_url = matchingItem.url.publicUrl;
     }

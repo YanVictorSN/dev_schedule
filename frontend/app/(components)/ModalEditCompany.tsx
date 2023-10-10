@@ -21,7 +21,7 @@ async function getCompany(url: string) {
   });
 }
 
-export default function ModalEditCompany({ id }) {
+export default function ModalEditCompany({ id }: { id: string }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [formData, setFormData] = useState({
     legal_name: '',
@@ -43,9 +43,9 @@ export default function ModalEditCompany({ id }) {
     if (isOpen && id) {
       fetchDataModalOpen(id);
     }
-  }, [isOpen, id]);
+  });
 
-  const fetchDataModalOpen = async (idCompany) => {
+  const fetchDataModalOpen = async (idCompany: string) => {
     try {
       const response = await fetch(
         `http://localhost:3001/companies/${idCompany}`,
@@ -129,7 +129,7 @@ export default function ModalEditCompany({ id }) {
 
   const [cnpj, setCNPJ] = useState('');
 
-  const formatCNPJ = (input) => {
+  const formatCNPJ = (input: string) => {
     const value = input.replace(/\D/g, '');
 
     let formattedValue = '';
@@ -155,7 +155,7 @@ export default function ModalEditCompany({ id }) {
   };
 
   const [formattedZipCode, setFormattedZipCode] = useState('');
-  const formatZipCode = (input) => {
+  const formatZipCode = (input: string) => {
     const value = input.replace(/\D/g, '');
 
     let formattedValue = '';
@@ -229,7 +229,7 @@ export default function ModalEditCompany({ id }) {
     'http://localhost:3001/companies',
     getCompany,
   );
-  const handleSubmit = async (idCompany, onClose) => {
+  const handleSubmit = async (idCompany: string, onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === '');
     console.log(formData);
     if (isEmptyField) {

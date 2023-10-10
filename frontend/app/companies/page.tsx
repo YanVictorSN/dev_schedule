@@ -6,7 +6,7 @@ import './../global.css';
 import { useState } from 'react';
 import CardCompany from '../(components)/CardCompany';
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function Companies() {
   // interface UserData{
 
@@ -34,9 +34,10 @@ export default function Companies() {
     city: string;
     state: string;
     zip_code: string;
+    legal_name: string;
   }
 
-  const filteredContacts = data.filter((contact) =>
+  const filteredContacts = data.filter((contact: Card) =>
     contact.legal_name.toLowerCase().includes(searchText.toLowerCase()),
   );
 

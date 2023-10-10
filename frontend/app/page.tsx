@@ -1,13 +1,9 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Image } from '@nextui-org/react';
 import './global.css';
 
 export default function Home() {
-  useEffect(() => {
-    import('preline');
-  }, []);
-
   return (
     <>
       <div className=" flex flex-col">
