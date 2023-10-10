@@ -13,7 +13,8 @@ lerna-debug.log*
 
 # OS
 .DS_Store
-
+.env
+sendgrid.env
 # Tests
 /coverage
 /.nyc_output
