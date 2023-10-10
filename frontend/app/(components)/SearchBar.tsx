@@ -2,7 +2,11 @@ import React from 'react';
 import { Input } from '@nextui-org/react';
 import { SearchIcon } from './SearchIcon';
 
-export default function SearchBar({ onSearch }) {
+interface SearchBarProps {
+  onSearch: (searchText: string) => void;
+}
+
+export default function SearchBar({ onSearch }: SearchBarProps) {
   return (
     <Input
       label="Pesquisar"

@@ -8,7 +8,15 @@ import * as maptilersdk from '@maptiler/sdk';
 import '@maptiler/geocoding-control/style.css';
 import '@maptiler/sdk/dist/maptiler-sdk.css';
 
-export default function Map({ props }) {
+interface MapProps {
+  address: string;
+  city: string;
+  complement: string;
+  state: string;
+  zip_code: string;
+}
+
+export default function Map({ props }: { props: MapProps }) {
   maptilersdk.config.apiKey = 'bgiEdIClqMkJQG0a99cy';
   console.log(props, 'assim que passa');
 
@@ -74,9 +82,11 @@ export default function Map({ props }) {
   }, [lng, lat, zoom]);
 
   return (
-    <div className="map-wrap">
-      <div className="geocoding">=</div>
-      <div ref={mapContainer} className="map" />
-    </div>
+    <>
+      <div className="map-wrap">
+        <div className="geocoding">=</div>
+        <div ref={mapContainer} className="map" />
+      </div>
+    </>
   );
 }

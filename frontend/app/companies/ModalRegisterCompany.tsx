@@ -3,7 +3,6 @@ import React from 'react';
 import { useState } from 'react';
 // import '../../global.css';
 import useSWRMutation from 'swr/mutation';
-import InputMask from 'react-input-mask';
 
 import {
   Modal,
@@ -99,7 +98,7 @@ export default function RegisterCompany() {
 
   const [cnpj, setCNPJ] = useState('');
 
-  const formatCNPJ = (input) => {
+  const formatCNPJ = (input :string) => {
     const value = input.replace(/\D/g, '');
 
     let formattedValue = '';
@@ -125,7 +124,7 @@ export default function RegisterCompany() {
   };
 
   const [formattedZipCode, setFormattedZipCode] = useState('');
-  const formatZipCode = (input) => {
+  const formatZipCode = (input: string) => {
     const value = input.replace(/\D/g, '');
 
     let formattedValue = '';
@@ -210,7 +209,7 @@ export default function RegisterCompany() {
     getCompany,
   );
 
-  const handleSubmit = async (onClose) => {
+  const handleSubmit = async (onClose : any) => {
     const isEmptyField = Object.values(formData).some((value) => value === '');
     console.log(formData);
     if (isEmptyField) {
