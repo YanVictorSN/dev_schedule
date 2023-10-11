@@ -144,7 +144,7 @@ export default function RegisterUSer() {
       clearMessage();
       return;
     }
-    console.log(file);
+
     const reader = new FileReader();
 
     reader.onload = async () => {
@@ -178,7 +178,7 @@ export default function RegisterUSer() {
   const { trigger } = useSWRMutation("http://localhost:3001/users", getUser);
   const handleSubmit = async (onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === "");
-    console.log(formData);
+   
     if (isEmptyField) {
       setMessage("Por favor, preencha todos os dados.");
       clearMessage();

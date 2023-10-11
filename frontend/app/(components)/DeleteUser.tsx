@@ -16,7 +16,7 @@ export default function DeleteUser({ id }: { id: string }) {
   const handleDelete = async () => {
     try {
       const result = await trigger({ id: id });
-      console.log(result);
+    
     } catch (e) {}
   };
 

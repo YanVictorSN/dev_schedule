@@ -200,7 +200,7 @@ export default function RegisterCompany() {
       clearMessage();
       return;
     }
-    console.log(file);
+
     const reader = new FileReader();
 
     reader.onload = async () => {
@@ -225,7 +225,7 @@ export default function RegisterCompany() {
     });
 
     if (response.ok) {
-      console.log("Arquivo enviado com sucesso");
+      setMessage("Arquivo enviado com sucesso");
     } else {
       console.error("Erro ao enviar arquivo:", response.statusText);
     }
@@ -238,7 +238,7 @@ export default function RegisterCompany() {
 
   const handleSubmit = async (onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === "");
-    console.log(formData);
+
     if (isEmptyField) {
       setMessage("Por favor, preencha todos os dados.");
       return;
@@ -251,8 +251,6 @@ export default function RegisterCompany() {
         },
         body: JSON.stringify(formData),
       });
-
-      console.log(res.status);
 
       if (res.status == 201) {
         setFormData({
