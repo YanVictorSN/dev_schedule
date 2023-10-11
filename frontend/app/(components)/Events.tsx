@@ -15,10 +15,5 @@ export async function getData() {
     return item;
   });
 
-  // console.log(resultado);
-
-  // if (!res.ok) {
-  //   throw new Error('Failed to fetch data');
-  // }
   return resultado;
 }

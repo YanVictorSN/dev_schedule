@@ -44,9 +44,7 @@ export default function Contacts() {
     });
   }
 
-  console.log(userData, postaData);
-
-  console.log(userData);
+  
 
   const [searchText, setSearchText] = useState("");
 

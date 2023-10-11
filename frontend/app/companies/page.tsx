@@ -45,8 +45,6 @@ export default function Companies() {
     });
   }
 
-  console.log(companyData, imgData);
-
   const [searchText, setSearchText] = useState("");
 
   if (userError) return <div>Failed to load</div>;

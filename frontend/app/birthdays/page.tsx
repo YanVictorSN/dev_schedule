@@ -23,7 +23,7 @@ export default class DemoApp extends React.Component<object, DemoAppState> {
   async componentDidMount() {
     try {
       const eventos = await this.adicionarEvento();
-      console.log(eventos);
+     
 
       this.setState({ currentEvents: eventos });
     } catch (error) {
@@ -44,7 +44,7 @@ export default class DemoApp extends React.Component<object, DemoAppState> {
       title: data.name,
       start: data.birthdate,
     }));
-    console.log(eventos);
+  
 
     return eventos;
   }

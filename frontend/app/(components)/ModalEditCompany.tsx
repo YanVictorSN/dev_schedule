@@ -195,16 +195,16 @@ export default function ModalEditCompany({ id }: { id: string }) {
       console.error("Nenhum arquivo selecionado");
       return;
     }
-    console.log(file);
+    
     const reader = new FileReader();
 
     reader.onload = async () => {
       if (reader.result) {
-        console.log("Leitura do arquivo bem-sucedida:", file.name);
+        setMessage("Leitura do arquivo bem-sucedida:")
         formUpload = new FormData();
         formUpload.append("file", file);
       } else {
-        console.log("Não foi possível ler a mensagem.");
+        setMessage("Não foi possível ler a mensagem.");
       }
     };
 
@@ -218,7 +218,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
     });
 
     if (response.ok) {
-      console.log("Arquivo enviado com sucesso");
+      setMessage("Arquivo enviado com sucesso");
     } else {
       console.error("Erro ao enviar arquivo:", response.statusText);
     }
@@ -231,7 +231,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
   );
   const handleSubmit = async (idCompany: string, onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === "");
-    console.log(formData);
+   
     if (isEmptyField) {
       setMessage("Por favor, preencha todos os dados.");
       return;
@@ -254,7 +254,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
     } catch (error: any) {
       setMessage("Erro ao enviar dados: " + error.message);
     }
-    console.log("Dados do formulário:", formData);
+   
   };
 
   return (
