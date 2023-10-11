@@ -49,8 +49,8 @@ export default function Companies() {
 
   const [searchText, setSearchText] = useState("");
 
-  if (userError) return <div>Failed to load</div>;
-  if (isUserLoading) return <div>Loading...</div>;
+  if (userError) return <div>Não carregou, recarrega a página.</div>;
+  if (isUserLoading) return <div>Carregando...</div>;
 
   const filteredContacts = companyData.filter((contact: CompanyCard) =>
     contact.legal_name.toLowerCase().includes(searchText.toLowerCase())
@@ -58,7 +58,6 @@ export default function Companies() {
 
   return (
     <div className="flex flex-col  justify-stretch gap-4">
-      <h1>Contatos</h1>
       <div className="flex justify-center">
         <SearchBar onSearch={setSearchText}></SearchBar>
       </div>
