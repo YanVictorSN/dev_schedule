@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
-import { useState } from 'react';
+"use client";
+import React from "react";
+import { useState } from "react";
 // import '../../global.css';
-import useSWRMutation from 'swr/mutation';
+import useSWRMutation from "swr/mutation";
 
 import {
   Modal,
@@ -12,42 +12,42 @@ import {
   Button,
   useDisclosure,
   ModalHeader,
-} from '@nextui-org/react';
-import { Input } from '@nextui-org/react';
+} from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 
 async function getCompany(url: string) {
   await fetch(url, {
-    method: 'GET',
+    method: "GET",
   });
 }
 
 export default function RegisterCompany() {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [formData, setFormData] = useState({
-    legal_name: '',
-    trade_name: '',
-    email: '',
-    cnpj: '',
-    contact_person: '',
-    whatsapp: '',
-    phone: '',
-    zip_code: '',
-    address: '',
-    city: '',
-    state: '',
-    complement: '',
-    logo_url: '',
+    legal_name: "",
+    trade_name: "",
+    email: "",
+    cnpj: "",
+    contact_person: "",
+    whatsapp: "",
+    phone: "",
+    zip_code: "",
+    address: "",
+    city: "",
+    state: "",
+    complement: "",
+    logo_url: "",
   });
 
-  const [phoneWhatsApp, setWhatsAppNumber] = useState('');
+  const [phoneWhatsApp, setWhatsAppNumber] = useState("");
   const formatWhatsAppNumber = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
-      formattedValue = '(';
+      formattedValue = "(";
 
       if (value.length <= 2) {
         formattedValue += value;
@@ -56,7 +56,7 @@ export default function RegisterCompany() {
       } else {
         formattedValue += `${value.slice(0, 2)}) ${value.slice(
           2,
-          7,
+          7
         )}-${value.slice(7, 11)}`;
       }
     }
@@ -68,14 +68,14 @@ export default function RegisterCompany() {
     });
   };
 
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
   const formatPhoneNumber = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
-      formattedValue = '(';
+      formattedValue = "(";
 
       if (value.length <= 2) {
         formattedValue += value;
@@ -84,7 +84,7 @@ export default function RegisterCompany() {
       } else {
         formattedValue += `${value.slice(0, 2)}) ${value.slice(
           2,
-          7,
+          7
         )}-${value.slice(7, 11)}`;
       }
     }
@@ -96,23 +96,23 @@ export default function RegisterCompany() {
     });
   };
 
-  const [cnpj, setCNPJ] = useState('');
+  const [cnpj, setCNPJ] = useState("");
 
-  const formatCNPJ = (input :string) => {
-    const value = input.replace(/\D/g, '');
+  const formatCNPJ = (input: string) => {
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
-      formattedValue = value.slice(0, 2) + '.';
+      formattedValue = value.slice(0, 2) + ".";
 
       if (value.length <= 5) {
         formattedValue += value.slice(2);
       } else if (value.length <= 8) {
-        formattedValue += value.slice(2, 5) + '.' + value.slice(5);
+        formattedValue += value.slice(2, 5) + "." + value.slice(5);
       } else if (value.length <= 12) {
         formattedValue +=
-          value.slice(2, 5) + '.' + value.slice(5, 8) + '/' + value.slice(8);
+          value.slice(2, 5) + "." + value.slice(5, 8) + "/" + value.slice(8);
       }
     }
 
@@ -123,11 +123,11 @@ export default function RegisterCompany() {
     });
   };
 
-  const [formattedZipCode, setFormattedZipCode] = useState('');
+  const [formattedZipCode, setFormattedZipCode] = useState("");
   const formatZipCode = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
       formattedValue = value;
@@ -147,21 +147,16 @@ export default function RegisterCompany() {
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
 
-    // if (e.target.name == 'phone') {
-    //   if (e.target.value.length > 0) {
-    //     console.log(e.target.value);
-    //     const formattedValue = e.target.value.replace(
-    //       /(\d{2})(\d{0,5})(\d{0,4})/,
-    //       '($1) $2-$3',
-    //     );
-    //     console.log(formattedValue), (e.target.value = formattedValue);
-    //   }
-    // }
-
     setFormData({
       ...formData,
       [name]: value,
     });
+  };
+
+  const clearMessage = () => {
+    setTimeout(() => {
+      setMessage("");
+    }, 2000);
   };
 
   let formUpload = new FormData();
@@ -172,7 +167,8 @@ export default function RegisterCompany() {
     formData.logo_url = file.name;
 
     if (!file) {
-      console.error('Nenhum arquivo selecionado');
+      setMessage("Nenhum arquivo selecionado");
+      clearMessage();
       return;
     }
     console.log(file);
@@ -180,11 +176,13 @@ export default function RegisterCompany() {
 
     reader.onload = async () => {
       if (reader.result) {
-        console.log('Leitura do arquivo bem-sucedida:', file.name);
+        setMessage("Foto carregada com sucesso, faça o upload.");
+        clearMessage();
         formUpload = new FormData();
-        formUpload.append('file', file);
+        formUpload.append("file", file);
       } else {
-        console.log('Não foi possível ler a mensagem.');
+        setMessage("Não foi possível ler o arquivo.");
+        clearMessage();
       }
     };
 
@@ -192,35 +190,35 @@ export default function RegisterCompany() {
   };
 
   const handleUpload = async () => {
-    const response = await fetch('http://localhost:3001/upload', {
-      method: 'POST',
+    const response = await fetch("http://localhost:3001/upload", {
+      method: "POST",
       body: formUpload,
     });
 
     if (response.ok) {
-      console.log('Arquivo enviado com sucesso');
+      console.log("Arquivo enviado com sucesso");
     } else {
-      console.error('Erro ao enviar arquivo:', response.statusText);
+      console.error("Erro ao enviar arquivo:", response.statusText);
     }
   };
 
   const { trigger } = useSWRMutation(
-    'http://localhost:3001/companies',
-    getCompany,
+    "http://localhost:3001/companies",
+    getCompany
   );
 
-  const handleSubmit = async (onClose : any) => {
-    const isEmptyField = Object.values(formData).some((value) => value === '');
+  const handleSubmit = async (onClose: any) => {
+    const isEmptyField = Object.values(formData).some((value) => value === "");
     console.log(formData);
     if (isEmptyField) {
-      setMessage('Por favor, preencha todos os dados.');
+      setMessage("Por favor, preencha todos os dados.");
       return;
     }
     try {
-      const res = await fetch('http://localhost:3001/companies', {
-        method: 'POST',
+      const res = await fetch("http://localhost:3001/companies", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -229,38 +227,38 @@ export default function RegisterCompany() {
 
       if (res.status == 201) {
         setFormData({
-          legal_name: '',
-          trade_name: '',
-          email: '',
-          cnpj: '',
-          contact_person: '',
-          whatsapp: '',
-          phone: '',
-          zip_code: '',
-          address: '',
-          city: '',
-          state: '',
-          complement: '',
-          logo_url: '',
+          legal_name: "",
+          trade_name: "",
+          email: "",
+          cnpj: "",
+          contact_person: "",
+          whatsapp: "",
+          phone: "",
+          zip_code: "",
+          address: "",
+          city: "",
+          state: "",
+          complement: "",
+          logo_url: "",
         });
 
-        setMessage('Empresa adicionada com sucesso!');
+        setMessage("Empresa adicionada com sucesso!");
         setTimeout(() => {
           onClose();
-          setMessage('');
+          setMessage("");
         }, 2000);
       }
 
       trigger();
     } catch (error: any) {
-      setMessage('Erro ao enviar dados: ' + error.message);
+      setMessage("Erro ao enviar dados: " + error.message);
     }
   };
 
   return (
     <>
       <Button onPress={onOpen}>Cadastrar Empresa</Button>
-      <Modal size={'2xl'} isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal size={"2xl"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>

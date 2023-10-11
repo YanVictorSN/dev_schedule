@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import useSWR from 'swr';
-import Modaltest from './register/ModalRegisterUser';
-import CardUser from '../(components)/CardUser';
-import SearchBar from '../(components)/SearchBar';
-import { useState } from 'react';
+import useSWR from "swr";
+import Modaltest from "./register/ModalRegisterUser";
+import CardUser from "../(components)/CardUser";
+import SearchBar from "../(components)/SearchBar";
+import { useState } from "react";
 
 interface Card {
   card: string;
@@ -27,13 +27,13 @@ export default function Contacts() {
     data: userData,
     error: userError,
     isLoading: isUserLoading,
-  } = useSWR('http://localhost:3001/users', fetcher);
+  } = useSWR("http://localhost:3001/users", fetcher);
 
   const {
     data: postaData,
     // error: postaError,
     // isLoading: isPostaLoading,
-  } = useSWR('http://localhost:3001/images', fetcher);
+  } = useSWR("http://localhost:3001/images", fetcher);
 
   if (userData && postaData) {
     userData.forEach((element: any) => {
@@ -48,13 +48,13 @@ export default function Contacts() {
 
   console.log(userData);
 
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
 
   if (userError) return <div>Failed to load</div>;
   if (isUserLoading) return <div>Loading...</div>;
 
   const filteredContacts = userData.filter((contact: Card) =>
-    contact.name.toLowerCase().includes(searchText.toLowerCase()),
+    contact.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
@@ -81,7 +81,7 @@ export default function Contacts() {
             state={card.state}
             zip_code={card.zip_code}
           ></CardUser>
-        ))}{' '}
+        ))}{" "}
       </div>
     </div>
   );

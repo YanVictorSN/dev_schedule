@@ -1,44 +1,59 @@
-'use client';
-import useSWR from 'swr';
-import RegisterCompany from './ModalRegisterCompany';
-import SearchBar from '../(components)/SearchBar';
-import './../global.css';
-import { useState } from 'react';
-import CardCompany from '../(components)/CardCompany';
+"use client";
+import useSWR from "swr";
+import RegisterCompany from "./ModalRegisterCompany";
+import SearchBar from "../(components)/SearchBar";
+import "./../global.css";
+import { useState } from "react";
+import CardCompany from "../(components)/CardCompany";
 
+interface CompanyCard {
+  legal_name: string;
+  trade_name: string;
+  email: string;
+  cnpj: string;
+  contact_person: string;
+  whatsapp: string;
+  phone: string;
+  zip_code: string;
+  address: string;
+  city: string;
+  state: string;
+  complement: string;
+  logo_url: string;
+  id: string;
+}
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function Companies() {
-  // interface UserData{
+  const {
+    data: companyData,
+    error: userError,
+    isLoading: isUserLoading,
+  } = useSWR("http://localhost:3001/companies", fetcher);
 
-  // }
-  const { data, error, isLoading } = useSWR(
-    'http://localhost:3001/companies',
-    fetcher,
-  );
+  const {
+    data: imgData,
+    // error: postaError,
+    // isLoading: isPostaLoading,
+  } = useSWR("http://localhost:3001/images", fetcher);
 
-  const [searchText, setSearchText] = useState('');
-
-  if (error) return <div>Failed to load</div>;
-  if (isLoading) return <div>Loading...</div>;
-
-  interface Card {
-    card: string;
-    name: string;
-    email: string;
-    gender: string;
-    public_url: string;
-    phone: string;
-    id: string;
-    address: string;
-    complement: string;
-    city: string;
-    state: string;
-    zip_code: string;
-    legal_name: string;
+  if (companyData && imgData) {
+    companyData.forEach((element: any) => {
+      imgData.map((item: any) => {
+        if (element.logo_url === item.name)
+          element.logo_url = item.url.publicUrl;
+      });
+    });
   }
 
-  const filteredContacts = data.filter((contact: Card) =>
-    contact.legal_name.toLowerCase().includes(searchText.toLowerCase()),
+  console.log(companyData, imgData);
+
+  const [searchText, setSearchText] = useState("");
+
+  if (userError) return <div>Failed to load</div>;
+  if (isUserLoading) return <div>Loading...</div>;
+
+  const filteredContacts = companyData.filter((contact: CompanyCard) =>
+    contact.legal_name.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
@@ -50,13 +65,16 @@ export default function Companies() {
       <div className="flex justify-center">
         <RegisterCompany></RegisterCompany>
       </div>
-      <div className="flex flex-col">
-        {filteredContacts.map((card: Card, index: number) => (
+      <div className="flex gap-4 px-4 py-4">
+        {filteredContacts.map((card: CompanyCard, index: number) => (
           <CardCompany
-            name={card.name}
+            legal_name={card.legal_name}
+            trade_name={card.trade_name}
+            contact_person={card.contact_person}
             email={card.email}
-            imageSrc={card.public_url}
-            gender={card.gender}
+            whatsapp={card.whatsapp}
+            logo_url={card.logo_url}
+            cnpj={card.cnpj}
             phone={card.phone}
             key={index}
             id={card.id}
@@ -66,7 +84,7 @@ export default function Companies() {
             state={card.state}
             zip_code={card.zip_code}
           ></CardCompany>
-        ))}{' '}
+        ))}{" "}
       </div>
     </div>
   );

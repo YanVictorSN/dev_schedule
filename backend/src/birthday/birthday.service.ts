@@ -25,7 +25,7 @@ export class BirthdayService {
 
       for (const person of data) {
         const msg = {
-          to: person.email, // Use o e-mail da pessoa
+          to: person.email,
           from: process.env.SENDGRID_SENDER_EMAIL,
           subject: 'Feliz Aniversário!',
           text: `Feliz aniversário, ${person.name}`,
