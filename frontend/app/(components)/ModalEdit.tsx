@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
-import { useState, useEffect } from 'react';
-import '../../app/global.css';
-import useSWRMutation from 'swr/mutation';
+"use client";
+import React from "react";
+import { useState, useEffect } from "react";
+import "../../app/global.css";
+import useSWRMutation from "swr/mutation";
 
 import {
   Modal,
@@ -12,39 +12,39 @@ import {
   Button,
   useDisclosure,
   ModalHeader,
-} from '@nextui-org/react';
-import { Input } from '@nextui-org/react';
+} from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 
 async function getUser(url: string) {
   await fetch(url, {
-    method: 'GET',
+    method: "GET",
   });
 }
 
-export default function ModalEdit({ id }: { id: string }) {
+export default function ModalEdit({ id }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [formData, setFormData] = useState({
     name: ``,
-    email: '',
-    birthdate: '',
-    gender: '',
-    occupation: '',
-    company: '',
-    whatsapp: '',
-    phone: '',
-    zip_code: '',
-    address: '',
-    city: '',
-    state: '',
-    complement: '',
-    photo_url: '',
+    email: "",
+    birthdate: "",
+    gender: "",
+    occupation: "",
+    company: "",
+    whatsapp: "",
+    phone: "",
+    zip_code: "",
+    address: "",
+    city: "",
+    state: "",
+    complement: "",
+    photo_url: "",
   });
 
   useEffect(() => {
     if (isOpen && id) {
       fetchDataModalOpen(id);
     }
-  });
+  }, [isOpen, id]);
 
   const fetchDataModalOpen = async (idUser: string) => {
     try {
@@ -62,18 +62,18 @@ export default function ModalEdit({ id }: { id: string }) {
 
       setFormData(data);
     } catch (error) {
-      console.error('Erro ao buscar dados:', error);
+      console.error("Erro ao buscar dados:", error);
     }
   };
 
-  const [phoneWhatsApp, setWhatsAppNumber] = useState('');
+  const [phoneWhatsApp, setWhatsAppNumber] = useState("");
   const formatWhatsAppNumber = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
-      formattedValue = '(';
+      formattedValue = "(";
 
       if (value.length <= 2) {
         formattedValue += value;
@@ -82,7 +82,7 @@ export default function ModalEdit({ id }: { id: string }) {
       } else {
         formattedValue += `${value.slice(0, 2)}) ${value.slice(
           2,
-          7,
+          7
         )}-${value.slice(7, 11)}`;
       }
     }
@@ -94,14 +94,14 @@ export default function ModalEdit({ id }: { id: string }) {
     });
   };
 
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
   const formatPhoneNumber = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
-      formattedValue = '(';
+      formattedValue = "(";
 
       if (value.length <= 2) {
         formattedValue += value;
@@ -110,7 +110,7 @@ export default function ModalEdit({ id }: { id: string }) {
       } else {
         formattedValue += `${value.slice(0, 2)}) ${value.slice(
           2,
-          7,
+          7
         )}-${value.slice(7, 11)}`;
       }
     }
@@ -122,11 +122,11 @@ export default function ModalEdit({ id }: { id: string }) {
     });
   };
 
-  const [formattedZipCode, setFormattedZipCode] = useState('');
+  const [formattedZipCode, setFormattedZipCode] = useState("");
   const formatZipCode = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
       formattedValue = value;
@@ -160,7 +160,7 @@ export default function ModalEdit({ id }: { id: string }) {
     formData.photo_url = file.name;
 
     if (!file) {
-      console.error('Nenhum arquivo selecionado');
+      console.error("Nenhum arquivo selecionado");
       return;
     }
     console.log(file);
@@ -168,11 +168,11 @@ export default function ModalEdit({ id }: { id: string }) {
 
     reader.onload = async () => {
       if (reader.result) {
-        console.log('Leitura do arquivo bem-sucedida:', file.name);
+        console.log("Leitura do arquivo bem-sucedida:", file.name);
         formUpload = new FormData();
-        formUpload.append('file', file);
+        formUpload.append("file", file);
       } else {
-        console.log('Não foi possível ler a mensagem.');
+        console.log("Não foi possível ler a mensagem.");
       }
     };
 
@@ -180,46 +180,46 @@ export default function ModalEdit({ id }: { id: string }) {
   };
 
   const handleUpload = async () => {
-    const response = await fetch('http://localhost:3001/upload', {
-      method: 'POST',
+    const response = await fetch("http://localhost:3001/upload", {
+      method: "POST",
       body: formUpload,
     });
 
     if (response.ok) {
-      console.log('Arquivo enviado com sucesso');
+      console.log("Arquivo enviado com sucesso");
     } else {
-      console.error('Erro ao enviar arquivo:', response.statusText);
+      console.error("Erro ao enviar arquivo:", response.statusText);
     }
   };
 
-  const [message, setMessage] = useState('');
-  const { trigger } = useSWRMutation('http://localhost:3001/users', getUser);
-  const handleSubmit = async (idUser: string, onClose: any) => {
-    const isEmptyField = Object.values(formData).some((value) => value === '');
+  const [message, setMessage] = useState("");
+  const { trigger } = useSWRMutation("http://localhost:3001/users", getUser);
+  const handleSubmit = async (idUser: string, onClose: Function) => {
+    const isEmptyField = Object.values(formData).some((value) => value === "");
     console.log(formData);
     if (isEmptyField) {
-      setMessage('Por favor, preencha todos os dados.');
+      setMessage("Por favor, preencha todos os dados.");
       return;
     }
     try {
       const res = await fetch(`http://localhost:3001/users/${idUser}`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
       if (res.status == 200) {
-        setMessage('Contato editado com sucesso!');
+        setMessage("Contato editado com sucesso!");
         setTimeout(() => {
           onClose();
         }, 2000);
       }
       trigger();
     } catch (error: any) {
-      setMessage('Erro ao enviar dados: ' + error.message);
+      setMessage("Erro ao enviar dados: " + error.message);
     }
-    console.log('Dados do formulário:', formData);
+    console.log("Dados do formulário:", formData);
   };
 
   return (
@@ -227,12 +227,12 @@ export default function ModalEdit({ id }: { id: string }) {
       <Button color="primary" variant="solid" onPress={onOpen}>
         Editar
       </Button>
-      <Modal size={'2xl'} isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal size={"2xl"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Cadastrar Usuário
+                Editar Usuário
               </ModalHeader>
               <ModalBody className="flex gap-0">
                 <div className="flex py-2 px-1 space-x-1 gap-4">

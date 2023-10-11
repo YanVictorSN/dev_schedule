@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
-import { useState } from 'react';
-import '../../global.css';
-import useSWRMutation from 'swr/mutation';
+"use client";
+import React from "react";
+import { useState } from "react";
+import "../../global.css";
+import useSWRMutation from "swr/mutation";
 
 import {
   Modal,
@@ -12,43 +12,43 @@ import {
   Button,
   useDisclosure,
   ModalHeader,
-} from '@nextui-org/react';
-import { Input } from '@nextui-org/react';
+} from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 
 async function getUser(url: string) {
   await fetch(url, {
-    method: 'GET',
+    method: "GET",
   });
 }
 
 export default function RegisterUSer() {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    birthdate: '',
-    gender: '',
-    occupation: '',
-    company: '',
-    whatsapp: '',
-    phone: '',
-    zip_code: '',
-    address: '',
-    city: '',
-    state: '',
-    complement: '',
-    photo_url: '',
+    name: "",
+    email: "",
+    birthdate: "",
+    gender: "",
+    occupation: "",
+    company: "",
+    whatsapp: "",
+    phone: "",
+    zip_code: "",
+    address: "",
+    city: "",
+    state: "",
+    complement: "",
+    photo_url: "",
   });
 
-  const [phoneWhatsApp, setWhatsAppNumber] = useState('');
+  const [phoneWhatsApp, setWhatsAppNumber] = useState("");
   const formatWhatsAppNumber = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
-      formattedValue = '(';
+      formattedValue = "(";
 
       if (value.length <= 2) {
         formattedValue += value;
@@ -57,7 +57,7 @@ export default function RegisterUSer() {
       } else {
         formattedValue += `${value.slice(0, 2)}) ${value.slice(
           2,
-          7,
+          7
         )}-${value.slice(7, 11)}`;
       }
     }
@@ -69,14 +69,14 @@ export default function RegisterUSer() {
     });
   };
 
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
   const formatPhoneNumber = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
-      formattedValue = '(';
+      formattedValue = "(";
 
       if (value.length <= 2) {
         formattedValue += value;
@@ -85,7 +85,7 @@ export default function RegisterUSer() {
       } else {
         formattedValue += `${value.slice(0, 2)}) ${value.slice(
           2,
-          7,
+          7
         )}-${value.slice(7, 11)}`;
       }
     }
@@ -97,11 +97,11 @@ export default function RegisterUSer() {
     });
   };
 
-  const [formattedZipCode, setFormattedZipCode] = useState('');
+  const [formattedZipCode, setFormattedZipCode] = useState("");
   const formatZipCode = (input: string) => {
-    const value = input.replace(/\D/g, '');
+    const value = input.replace(/\D/g, "");
 
-    let formattedValue = '';
+    let formattedValue = "";
 
     if (value.length > 0) {
       formattedValue = value;
@@ -128,7 +128,7 @@ export default function RegisterUSer() {
 
   const clearMessage = () => {
     setTimeout(() => {
-      setMessage('');
+      setMessage("");
     }, 2000);
   };
 
@@ -140,7 +140,7 @@ export default function RegisterUSer() {
     formData.photo_url = file.name;
 
     if (!file) {
-      setMessage('Nenhum arquivo selecionado');
+      setMessage("Nenhum arquivo selecionado");
       clearMessage();
       return;
     }
@@ -149,12 +149,12 @@ export default function RegisterUSer() {
 
     reader.onload = async () => {
       if (reader.result) {
-        setMessage('Foto carregada com sucesso, faça o upload.');
+        setMessage("Foto carregada com sucesso, faça o upload.");
         clearMessage();
         formUpload = new FormData();
-        formUpload.append('file', file);
+        formUpload.append("file", file);
       } else {
-        setMessage('Não foi possível ler o arquivo.');
+        setMessage("Não foi possível ler o arquivo.");
         clearMessage();
       }
     };
@@ -163,62 +163,62 @@ export default function RegisterUSer() {
   };
 
   const handleUpload = async () => {
-    const response = await fetch('http://localhost:3001/upload', {
-      method: 'POST',
+    const response = await fetch("http://localhost:3001/upload", {
+      method: "POST",
       body: formUpload,
     });
 
     if (response.ok) {
-      setMessage('Upload da imagem concluído.');
+      setMessage("Upload da imagem concluído.");
     } else {
-      console.error('Erro ao enviar arquivo:', response.statusText);
+      console.error("Erro ao enviar arquivo:", response.statusText);
     }
   };
 
-  const { trigger } = useSWRMutation('http://localhost:3001/users', getUser);
+  const { trigger } = useSWRMutation("http://localhost:3001/users", getUser);
   const handleSubmit = async (onClose: any) => {
-    const isEmptyField = Object.values(formData).some((value) => value === '');
+    const isEmptyField = Object.values(formData).some((value) => value === "");
     console.log(formData);
     if (isEmptyField) {
-      setMessage('Por favor, preencha todos os dados.');
+      setMessage("Por favor, preencha todos os dados.");
       clearMessage();
       return;
     }
     try {
-      const res = await fetch('http://localhost:3001/users', {
-        method: 'POST',
+      const res = await fetch("http://localhost:3001/users", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (res.status == 201) {
         setFormData({
-          name: '',
-          email: '',
-          birthdate: '',
-          gender: '',
-          occupation: '',
-          company: '',
-          whatsapp: '',
-          phone: '',
-          zip_code: '',
-          address: '',
-          city: '',
-          state: '',
-          complement: '',
-          photo_url: '',
+          name: "",
+          email: "",
+          birthdate: "",
+          gender: "",
+          occupation: "",
+          company: "",
+          whatsapp: "",
+          phone: "",
+          zip_code: "",
+          address: "",
+          city: "",
+          state: "",
+          complement: "",
+          photo_url: "",
         });
 
-        setMessage('Contato adicionado com sucesso!');
+        setMessage("Contato adicionado com sucesso!");
         clearMessage();
         onClose();
       }
 
       trigger();
     } catch (error: any) {
-      setMessage('Erro ao enviar dados: ' + error.message);
+      setMessage("Erro ao enviar dados: " + error.message);
       clearMessage();
     }
   };
@@ -226,7 +226,7 @@ export default function RegisterUSer() {
   return (
     <>
       <Button onPress={onOpen}>Cadastrar Contato</Button>
-      <Modal size={'2xl'} isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal size={"2xl"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
