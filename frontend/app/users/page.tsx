@@ -50,8 +50,8 @@ export default function Contacts() {
 
   const [searchText, setSearchText] = useState("");
 
-  if (userError) return <div>Failed to load</div>;
-  if (isUserLoading) return <div>Loading...</div>;
+  if (userError) return <div>Falha em carregar</div>;
+  if (isUserLoading) return <div>Carregando...</div>;
 
   const filteredContacts = userData.filter((contact: Card) =>
     contact.name.toLowerCase().includes(searchText.toLowerCase())

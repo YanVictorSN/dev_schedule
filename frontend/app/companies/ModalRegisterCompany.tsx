@@ -32,6 +32,7 @@ export default function RegisterCompany() {
     contact_person: "",
     whatsapp: "",
     phone: "",
+    fixed_phone: "",
     zip_code: "",
     address: "",
     city: "",
@@ -93,6 +94,34 @@ export default function RegisterCompany() {
     setFormData({
       ...formData,
       phone: value,
+    });
+  };
+
+  const [fixedNumber, setFixedNumber] = useState("");
+  const formatFixedNumber = (input: string) => {
+    const value = input.replace(/\D/g, "");
+
+    let formattedValue = "";
+
+    if (value.length > 0) {
+      formattedValue = "(";
+
+      if (value.length <= 2) {
+        formattedValue += value;
+      } else if (value.length <= 7) {
+        formattedValue += `${value.slice(0, 2)}) ${value.slice(2)}`;
+      } else {
+        formattedValue += `${value.slice(0, 2)}) ${value.slice(
+          2,
+          7
+        )}-${value.slice(7, 11)}`;
+      }
+    }
+
+    setFixedNumber(formattedValue);
+    setFormData({
+      ...formData,
+      fixed_phone: value,
     });
   };
 
@@ -234,6 +263,7 @@ export default function RegisterCompany() {
           contact_person: "",
           whatsapp: "",
           phone: "",
+          fixed_phone: "",
           zip_code: "",
           address: "",
           city: "",
@@ -352,10 +382,10 @@ export default function RegisterCompany() {
                     label="Telefone Fixo"
                     placeholder="(xx) xxxx-xxxx"
                     size="sm"
-                    value={phoneNumber}
+                    value={fixedNumber}
                     onChange={(e) => {
                       handleInputChange(e);
-                      formatPhoneNumber(e.target.value);
+                      formatFixedNumber(e.target.value);
                     }}
                   />
                 </div>
