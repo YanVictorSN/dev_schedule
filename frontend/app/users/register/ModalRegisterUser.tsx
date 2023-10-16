@@ -164,7 +164,7 @@ export default function RegisterUSer() {
 
   const handleUpload = async () => {
     const response = await fetch(
-      "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/upload",
+      "https://backend-dev-schedule.vercel.app/upload",
       {
         method: "POST",
         body: formUpload,
@@ -178,7 +178,10 @@ export default function RegisterUSer() {
     }
   };
 
-  const { trigger } = useSWRMutation("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users", getUser);
+  const { trigger } = useSWRMutation(
+    "https://backend-dev-schedule.vercel.app/users",
+    getUser
+  );
   const handleSubmit = async (onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === "");
 
@@ -188,16 +191,13 @@ export default function RegisterUSer() {
       return;
     }
     try {
-      const res = await fetch(
-        "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const res = await fetch("https://backend-dev-schedule.vercel.app/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (res.status == 201) {
         setFormData({

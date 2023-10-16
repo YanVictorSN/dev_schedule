@@ -49,7 +49,7 @@ export default function ModalEdit({ id }: any) {
   const fetchDataModalOpen = async (idUser: string) => {
     try {
       const response = await fetch(
-        `https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users/${idUser}`
+        `https://backend-dev-schedule.vercel.app/users/${idUser}`
       );
       const data = await response.json();
       if (data.whatsapp) {
@@ -183,7 +183,7 @@ export default function ModalEdit({ id }: any) {
 
   const handleUpload = async () => {
     const response = await fetch(
-      "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/upload",
+      "https://backend-dev-schedule.vercel.app/upload",
       {
         method: "POST",
         body: formUpload,
@@ -199,7 +199,7 @@ export default function ModalEdit({ id }: any) {
 
   const [message, setMessage] = useState("");
   const { trigger } = useSWRMutation(
-    "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users",
+    "https://backend-dev-schedule.vercel.app/users",
     getUser
   );
   const handleSubmit = async (idUser: string, onClose: Function) => {
@@ -211,7 +211,7 @@ export default function ModalEdit({ id }: any) {
     }
     try {
       const res = await fetch(
-        `https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users/${idUser}`,
+        `https://backend-dev-schedule.vercel.app/users/${idUser}`,
         {
           method: "PATCH",
           headers: {

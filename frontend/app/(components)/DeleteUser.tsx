@@ -9,7 +9,7 @@ async function sendRequest(url: string, { arg }: { arg: { id: string } }) {
 
 export default function DeleteUser({ id }: { id: string }) {
   const { trigger, isMutating } = useSWRMutation(
-    "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users",
+    "https://backend-dev-schedule.vercel.app/users",
     sendRequest
   );
 

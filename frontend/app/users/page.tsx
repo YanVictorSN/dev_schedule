@@ -27,13 +27,13 @@ export default function Contacts() {
     data: userData,
     error: userError,
     isLoading: isUserLoading,
-  } = useSWR("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users", fetcher);
+  } = useSWR("https://backend-dev-schedule.vercel.app/users", fetcher);
 
   const {
     data: postaData,
     // error: postaError,
     // isLoading: isPostaLoading,
-  } = useSWR("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/images", fetcher);
+  } = useSWR("https://backend-dev-schedule.vercel.app/images", fetcher);
 
   if (userData && postaData) {
     userData.forEach((element: any) => {
@@ -43,8 +43,6 @@ export default function Contacts() {
       });
     });
   }
-
-  
 
   const [searchText, setSearchText] = useState("");
 

@@ -48,7 +48,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
   const fetchDataModalOpen = async (idCompany: string) => {
     try {
       const response = await fetch(
-        `https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies/${idCompany}`
+        `https://backend-dev-schedule.vercel.app/companies/${idCompany}`
       );
       const data = await response.json();
 
@@ -213,7 +213,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
 
   const handleUpload = async () => {
     const response = await fetch(
-      "https://vercel.com/yanvictorsns-projects/backend-dev-scheduleupload",
+      "https://backend-dev-schedule.vercel.app/upload",
       {
         method: "POST",
         body: formUpload,
@@ -229,7 +229,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
 
   const [message, setMessage] = useState("");
   const { trigger } = useSWRMutation(
-    "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies",
+    "https://backend-dev-schedule.vercel.app/companies",
     getCompany
   );
   const handleSubmit = async (idCompany: string, onClose: any) => {
@@ -241,7 +241,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
     }
     try {
       const res = await fetch(
-        `https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies/${idCompany}`,
+        `https://backend-dev-schedule.vercel.app/companies/${idCompany}`,
         {
           method: "PATCH",
           headers: {

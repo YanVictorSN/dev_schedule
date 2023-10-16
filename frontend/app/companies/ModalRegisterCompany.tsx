@@ -220,7 +220,7 @@ export default function RegisterCompany() {
 
   const handleUpload = async () => {
     const response = await fetch(
-      "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/upload",
+      "https://backend-dev-schedule.vercel.app/upload",
       {
         method: "POST",
         body: formUpload,
@@ -235,7 +235,7 @@ export default function RegisterCompany() {
   };
 
   const { trigger } = useSWRMutation(
-    "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies",
+    "https://backend-dev-schedule.vercel.app/companies",
     getCompany
   );
 
@@ -248,7 +248,7 @@ export default function RegisterCompany() {
     }
     try {
       const res = await fetch(
-        "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies",
+        "https://backend-dev-schedule.vercel.app/companies",
         {
           method: "POST",
           headers: {

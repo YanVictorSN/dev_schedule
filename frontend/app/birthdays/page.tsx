@@ -23,7 +23,6 @@ export default class DemoApp extends React.Component<object, DemoAppState> {
   async componentDidMount() {
     try {
       const eventos = await this.adicionarEvento();
-     
 
       this.setState({ currentEvents: eventos });
     } catch (error) {
@@ -32,10 +31,12 @@ export default class DemoApp extends React.Component<object, DemoAppState> {
   }
 
   async adicionarEvento() {
-    const resData = await fetch("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users");
+    const resData = await fetch(
+      "https://backend-dev-schedule.vercel.app/users"
+    );
 
     const resBithMessage = await fetch(
-      "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/birthday/send-greetings"
+      "https://backend-dev-schedule.vercel.app/birthday/send-greetings"
     );
 
     const arrayData = await resData.json();
@@ -44,7 +45,6 @@ export default class DemoApp extends React.Component<object, DemoAppState> {
       title: data.name,
       start: data.birthdate,
     }));
-  
 
     return eventos;
   }

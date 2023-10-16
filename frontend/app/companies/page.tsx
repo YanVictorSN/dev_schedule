@@ -28,13 +28,13 @@ export default function Companies() {
     data: companyData,
     error: userError,
     isLoading: isUserLoading,
-  } = useSWR("https://vercel.com/yanvictorsns-projects/backend-dev-schedule", fetcher);
+  } = useSWR("https://backend-dev-schedule.vercel.app", fetcher);
 
   const {
     data: imgData,
     // error: postaError,
     // isLoading: isPostaLoading,
-  } = useSWR("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/images", fetcher);
+  } = useSWR("https://backend-dev-schedule.vercel.app/images", fetcher);
 
   if (companyData && imgData) {
     companyData.forEach((element: any) => {
