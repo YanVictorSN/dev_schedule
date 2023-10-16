@@ -43,7 +43,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
     if (isOpen && id) {
       fetchDataModalOpen(id);
     }
-  }, [isOpen, id]);
+  }, []);
 
   const fetchDataModalOpen = async (idCompany: string) => {
     try {
@@ -240,13 +240,16 @@ export default function ModalEditCompany({ id }: { id: string }) {
       return;
     }
     try {
-      const res = await fetch(`https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies/${idCompany}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies/${idCompany}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       if (res.status == 200) {
         setMessage("Contato editado com sucesso!");
         setTimeout(() => {
