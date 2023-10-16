@@ -32,10 +32,10 @@ export default class DemoApp extends React.Component<object, DemoAppState> {
   }
 
   async adicionarEvento() {
-    const resData = await fetch("http://localhost:3001/users");
+    const resData = await fetch("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users");
 
     const resBithMessage = await fetch(
-      "http://localhost:3001/birthday/send-greetings"
+      "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/birthday/send-greetings"
     );
 
     const arrayData = await resData.json();

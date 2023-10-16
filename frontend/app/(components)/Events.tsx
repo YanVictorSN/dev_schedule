@@ -1,6 +1,6 @@
 export async function getData() {
-  const resData = await fetch("http://localhost:3001/users");
-  const resImg = await fetch("http://localhost:3001/images");
+  const resData = await fetch("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users");
+  const resImg = await fetch("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/images");
 
   const arrayData = await resData.json();
   const arrayDataImg = await resImg.json();

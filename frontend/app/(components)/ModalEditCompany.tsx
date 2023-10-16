@@ -48,7 +48,7 @@ export default function ModalEditCompany({ id }: { id: string }) {
   const fetchDataModalOpen = async (idCompany: string) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/companies/${idCompany}`
+        `https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies/${idCompany}`
       );
       const data = await response.json();
 
@@ -195,12 +195,12 @@ export default function ModalEditCompany({ id }: { id: string }) {
       console.error("Nenhum arquivo selecionado");
       return;
     }
-    
+
     const reader = new FileReader();
 
     reader.onload = async () => {
       if (reader.result) {
-        setMessage("Leitura do arquivo bem-sucedida:")
+        setMessage("Leitura do arquivo bem-sucedida:");
         formUpload = new FormData();
         formUpload.append("file", file);
       } else {
@@ -212,10 +212,13 @@ export default function ModalEditCompany({ id }: { id: string }) {
   };
 
   const handleUpload = async () => {
-    const response = await fetch("http://localhost:3001/upload", {
-      method: "POST",
-      body: formUpload,
-    });
+    const response = await fetch(
+      "https://vercel.com/yanvictorsns-projects/backend-dev-scheduleupload",
+      {
+        method: "POST",
+        body: formUpload,
+      }
+    );
 
     if (response.ok) {
       setMessage("Arquivo enviado com sucesso");
@@ -226,18 +229,18 @@ export default function ModalEditCompany({ id }: { id: string }) {
 
   const [message, setMessage] = useState("");
   const { trigger } = useSWRMutation(
-    "http://localhost:3001/companies",
+    "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies",
     getCompany
   );
   const handleSubmit = async (idCompany: string, onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === "");
-   
+
     if (isEmptyField) {
       setMessage("Por favor, preencha todos os dados.");
       return;
     }
     try {
-      const res = await fetch(`http://localhost:3001/companies/${idCompany}`, {
+      const res = await fetch(`https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies/${idCompany}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -254,7 +257,6 @@ export default function ModalEditCompany({ id }: { id: string }) {
     } catch (error: any) {
       setMessage("Erro ao enviar dados: " + error.message);
     }
-   
   };
 
   return (

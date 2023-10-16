@@ -9,14 +9,13 @@ async function sendRequest(url: string, { arg }: { arg: { id: string } }) {
 
 export default function DeleteCompany({ id }: { id: string }) {
   const { trigger, isMutating } = useSWRMutation(
-    "http://localhost:3001/companies",
+    "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies",
     sendRequest
   );
 
   const handleDelete = async () => {
     try {
       const result = await trigger({ id: id });
-   
     } catch (e) {}
   };
 

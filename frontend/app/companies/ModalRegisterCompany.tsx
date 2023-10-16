@@ -219,10 +219,13 @@ export default function RegisterCompany() {
   };
 
   const handleUpload = async () => {
-    const response = await fetch("http://localhost:3001/upload", {
-      method: "POST",
-      body: formUpload,
-    });
+    const response = await fetch(
+      "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/upload",
+      {
+        method: "POST",
+        body: formUpload,
+      }
+    );
 
     if (response.ok) {
       setMessage("Arquivo enviado com sucesso");
@@ -232,7 +235,7 @@ export default function RegisterCompany() {
   };
 
   const { trigger } = useSWRMutation(
-    "http://localhost:3001/companies",
+    "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies",
     getCompany
   );
 
@@ -244,13 +247,16 @@ export default function RegisterCompany() {
       return;
     }
     try {
-      const res = await fetch("http://localhost:3001/companies", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/companies",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (res.status == 201) {
         setFormData({

@@ -21,7 +21,7 @@ async function getUser(url: string) {
   });
 }
 
-export default function ModalEdit({ id }) {
+export default function ModalEdit({ id }: any) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [formData, setFormData] = useState({
     name: ``,
@@ -48,7 +48,9 @@ export default function ModalEdit({ id }) {
 
   const fetchDataModalOpen = async (idUser: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/users/${idUser}`);
+      const response = await fetch(
+        `https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users/${idUser}`
+      );
       const data = await response.json();
       if (data.whatsapp) {
         formatWhatsAppNumber(data.whatsapp);
@@ -163,12 +165,12 @@ export default function ModalEdit({ id }) {
       console.error("Nenhum arquivo selecionado");
       return;
     }
-    
+
     const reader = new FileReader();
 
     reader.onload = async () => {
       if (reader.result) {
-      setMessage("Leitura do arquivo bem-sucedida!")
+        setMessage("Leitura do arquivo bem-sucedida!");
         formUpload = new FormData();
         formUpload.append("file", file);
       } else {
@@ -180,10 +182,13 @@ export default function ModalEdit({ id }) {
   };
 
   const handleUpload = async () => {
-    const response = await fetch("http://localhost:3001/upload", {
-      method: "POST",
-      body: formUpload,
-    });
+    const response = await fetch(
+      "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/upload",
+      {
+        method: "POST",
+        body: formUpload,
+      }
+    );
 
     if (response.ok) {
       setMessage("Arquivo enviado com sucesso");
@@ -193,7 +198,10 @@ export default function ModalEdit({ id }) {
   };
 
   const [message, setMessage] = useState("");
-  const { trigger } = useSWRMutation("http://localhost:3001/users", getUser);
+  const { trigger } = useSWRMutation(
+    "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users",
+    getUser
+  );
   const handleSubmit = async (idUser: string, onClose: Function) => {
     const isEmptyField = Object.values(formData).some((value) => value === "");
 
@@ -202,13 +210,16 @@ export default function ModalEdit({ id }) {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:3001/users/${idUser}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users/${idUser}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       if (res.status == 200) {
         setMessage("Contato editado com sucesso!");
         setTimeout(() => {

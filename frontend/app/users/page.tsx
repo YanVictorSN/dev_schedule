@@ -27,13 +27,13 @@ export default function Contacts() {
     data: userData,
     error: userError,
     isLoading: isUserLoading,
-  } = useSWR("http://localhost:3001/users", fetcher);
+  } = useSWR("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users", fetcher);
 
   const {
     data: postaData,
     // error: postaError,
     // isLoading: isPostaLoading,
-  } = useSWR("http://localhost:3001/images", fetcher);
+  } = useSWR("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/images", fetcher);
 
   if (userData && postaData) {
     userData.forEach((element: any) => {

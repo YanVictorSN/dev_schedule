@@ -163,10 +163,13 @@ export default function RegisterUSer() {
   };
 
   const handleUpload = async () => {
-    const response = await fetch("http://localhost:3001/upload", {
-      method: "POST",
-      body: formUpload,
-    });
+    const response = await fetch(
+      "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/upload",
+      {
+        method: "POST",
+        body: formUpload,
+      }
+    );
 
     if (response.ok) {
       setMessage("Upload da imagem concluído.");
@@ -175,23 +178,26 @@ export default function RegisterUSer() {
     }
   };
 
-  const { trigger } = useSWRMutation("http://localhost:3001/users", getUser);
+  const { trigger } = useSWRMutation("https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users", getUser);
   const handleSubmit = async (onClose: any) => {
     const isEmptyField = Object.values(formData).some((value) => value === "");
-   
+
     if (isEmptyField) {
       setMessage("Por favor, preencha todos os dados.");
       clearMessage();
       return;
     }
     try {
-      const res = await fetch("http://localhost:3001/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://vercel.com/yanvictorsns-projects/backend-dev-schedule/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (res.status == 201) {
         setFormData({
