@@ -168,6 +168,7 @@ export default function RegisterUSer() {
       {
         method: "POST",
         body: formUpload,
+        mode: "no-cors",
       }
     );
 
@@ -197,6 +198,7 @@ export default function RegisterUSer() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+        mode: "no-cors",
       });
 
       if (res.status == 201) {
